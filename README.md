@@ -5,7 +5,9 @@
 ## Emma Choi's remarks
 
 ### citations / worked with / received help from
-I have only receieved help from the Piazza posts and notes. 
+I consulted this website for the number of solutions I should be receiving. 
+http://www.ic-net.or.jp/home/takaken/e/queen/
+
 
 
 ## Holmes's remarks

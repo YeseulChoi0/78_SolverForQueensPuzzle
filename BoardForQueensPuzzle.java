@@ -24,7 +24,12 @@ public class BoardForQueensPuzzle {
               filesWithQueens.
      */
     public BoardForQueensPuzzle( BoardForQueensPuzzle old) {
-        // your code here
+        this.lastRankFilled = old.lastRankFilled;
+        int size = old.filesWithQueens.length;
+        this.filesWithQueens = new int[size];
+        for (int i = 0; i < size; i++){
+          this.filesWithQueens[i] = old.filesWithQueens[i];
+        }
     }
 
 
@@ -94,7 +99,7 @@ public class BoardForQueensPuzzle {
         This method checks the last-filled rank.
      */
     public boolean accept() {
-        return    lastRankFilled == filesWithQueens.length - 1
+        return lastRankFilled == filesWithQueens.length - 1
                && ! lastIsNg();
     }
 

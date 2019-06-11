@@ -50,21 +50,51 @@ public class SolverForQueensPuzzle {
          that starts -- and ends -- with that board.
      */
     private void recordSolutionsStarted() {
-
+            nBoardsConsidered++;
         // Which has been requested, a base case or recursive case?
-            // your code here
-            // action(s) for base case(s)
-            System.out.println( "  for debugging: base case detected for..."
-                              + System.lineSeparator()
-                              + inProgress
-                              );
+            if (inProgress.accept()){
+              solutions.add(inProgress);
+              System.out.println( "  for debugging: base case detected for..."
+                                + System.lineSeparator()
+                                + inProgress
+                                );
+            }
 
-            // action for recursive cases
-            // your code here
-            System.out.println( "  for debugging: recursive case detected for..."
-                              + System.lineSeparator()
-                              + inProgress
-                              );
+            else{
+              System.out.println( "  for debugging: recursive case detected for..."
+                                + System.lineSeparator()
+                                + inProgress
+                                );
+              if (inProgress.lastIsNg()){
+                inProgress.depopulate();
+              }
+
+              else if (!inProgress.lastIsNg()){
+                for (int i = 0; i < inProgress.ranks(); i++){
+                  BoardForQueensPuzzle saveProgress = new BoardForQueensPuzzle(inProgress);
+                  inProgress = new BoardForQueensPuzzle(inProgress);
+                  inProgress.populate(i);
+                  recordSolutionsStarted();
+                  inProgress = saveProgress;
+                }
+              }
+            }
+
+            // else{
+            //   System.out.println( "  for debugging: recursive case detected for..."
+            //                     + System.lineSeparator()
+            //                     + inProgress
+            //                     );
+            //   for (int i = 0; i < inProgress.ranks(); i++){
+            //     inProgress = new BoardForQueensPuzzle(inProgress);
+            //     inProgress.populate(i);
+            //     if (inProgress.lastIsNg()){
+            //       inProgress.depopulate();
+            //       return;
+            //     }
+            //     recordSolutionsStarted();
+            //   }
+            // }
     }
 
 
@@ -81,7 +111,7 @@ public class SolverForQueensPuzzle {
 
         inProgress = new BoardForQueensPuzzle( size);
         startAt = System.currentTimeMillis();
-        recordSolutionsStarted(); // "started" with an empty board
+        this.recordSolutionsStarted(); // "started" with an empty board
         elapsedSeconds =   (System.currentTimeMillis() - startAt)
                          / 1000.;
     }
